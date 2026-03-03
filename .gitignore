@@ -1,0 +1,44 @@
+# OS / Editor
+.DS_Store
+Thumbs.db
+desktop.ini
+*.tmp
+*.swp
+*.swo
+~$*
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# Build / package
+build/
+dist/
+*.spec.bak
+*.zip
+
+# Runtime output
+logs/
+output/
+outputs/
+历史数据/
+输出结果/
+_run_error.txt
+*.log
+
+# Local backup / private data
+backup/private/
+网管指标-备份/
+
+# Sensitive files (keep examples only)
+license.key
+configs/*.secret.*
+configs/*.private.*
+

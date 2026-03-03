@@ -1,0 +1,55 @@
+步骤 1: 清理旧的构建文件
+首先，确保清理掉旧的构建文件，以避免之前的构建内容干扰到新的构建。
+
+打开 CMD 或 PowerShell，并导航到 E:\Tool_Build\_pack_src 目录。
+
+执行以下命令来删除旧的构建文件和临时文件：
+
+bash
+复制代码
+if exist build rmdir /s /q build
+if exist dist rmdir /s /q dist
+if exist Release rmdir /s /q Release
+del /q *.spec 2>nul
+步骤 2: 重新打包应用程序
+接下来，重新使用修改后的代码进行打包。
+
+确保您当前仍在 E:\Tool_Build\_pack_src 目录中。
+
+执行以下命令，使用 pyinstaller 打包应用程序：
+
+bash
+复制代码
+.\.venv_pack\Scripts\python.exe -m PyInstaller --noconfirm --clean --onefile --windowed --name "活动保障指标自动化输出工具" main_gui.py
+这将重新生成 Tool_Build.exe 可执行文件，并且会清除任何缓存和临时文件。
+
+步骤 3: 验证生成的输出
+等待 PyInstaller 打包完成后，检查 dist 目录，确保生成了新的 Tool_Build.exe 文件。
+
+确保在 Release 目录下也生成了如下文件：
+
+Tool_Build.exe
+
+config.ini
+
+配置文件\项目配置.xlsx（如果存在）
+
+在 Release 目录下，运行 Tool_Build.exe 并验证：
+
+微信简报 是否有内容
+
+通报结果 Excel 文件是否有内容，且内容是否正确
+
+步骤 4: 分发和使用
+将 Release 目录中的文件（包括 Tool_Build.exe、config.ini、配置文件 以及相关的输出结果）打包并分发给您的同事使用。
+
+步骤 5: 确保备份和整理
+在分发之前，请确保以下文件已备份：
+
+修改后的 main_gui.py
+
+修改后的 backend_logic.py
+
+打包生成的所有输出文件
+
+这样，您就可以确保一切功能正常并可以将工具分享给团队成员。

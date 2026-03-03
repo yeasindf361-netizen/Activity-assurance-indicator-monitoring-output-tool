@@ -1,0 +1,4 @@
+time_start,time_end,vendor,cgi,cell_name,kpi_util_max,kpi_prb_ul_util,kpi_prb_dl_util
+2026-03-01 08:45:00,2026-03-01 09:00:00,ZTE,460-00-100000001,示例5G小区A,0.3385,0.11,0.09
+2026-03-01 08:45:00,2026-03-01 09:00:00,ZTE,460-00-100000002,示例5G小区B,0.95,-,N/A
+

@@ -1,0 +1,13 @@
+[app]
+name = Event-Support-Tool
+env = local
+
+[paths]
+input_4g = ./data_sample/4G指标
+input_5g = ./data_sample/5G指标
+output_dir = ./output
+
+[runtime]
+timezone = Asia/Shanghai
+log_level = INFO
+

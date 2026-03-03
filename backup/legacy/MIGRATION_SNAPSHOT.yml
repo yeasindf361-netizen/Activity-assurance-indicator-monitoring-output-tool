@@ -1,0 +1,13 @@
+source_root: D:\ClaudeProjects\Tool_Build\_pack_src
+note: copied only code/workflow/docs baseline; production data and license key intentionally excluded.
+excluded_sensitive:
+  - license.key
+  - 网管指标/**
+  - 历史数据/**
+  - 保障小区清单/保障小区清单.xlsx
+  - 配置文件/项目配置.xlsx
+excluded_runtime:
+  - build/**
+  - dist/**
+  - logs/**
+  - __pycache__/**

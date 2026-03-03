@@ -1,0 +1,11 @@
+# Runtime dependencies
+pandas>=1.5.0,<3.0.0
+numpy>=1.23.0,<2.0.0
+openpyxl>=3.0.0,<4.0.0
+rapidfuzz>=2.0.0,<4.0.0
+customtkinter>=5.0.0,<6.0.0
+Pillow>=9.0.0,<11.0.0
+CTkMessagebox>=2.0.0,<3.0.0
+pytz>=2022.0
+python-dateutil>=2.8.0
+

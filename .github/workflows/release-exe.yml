@@ -1,0 +1,83 @@
+name: Release EXE
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build-and-release:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python 3.13
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.13'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install pyinstaller
+
+    - name: Check spec exists
+      run: |
+        if (!(Test-Path "scripts/packaging/KPI_Tool.spec")) {
+          Write-Error "scripts/packaging/KPI_Tool.spec not found!"
+          exit 1
+        }
+        Write-Host "spec found"
+
+    - name: Build EXE with PyInstaller
+      run: |
+        pyinstaller scripts/packaging/KPI_Tool.spec --noconfirm --clean --distpath dist --workpath build
+        if (!(Test-Path "dist/KPI_Tool")) {
+          Write-Error "Build failed: dist/KPI_Tool not found"
+          exit 1
+        }
+
+    - name: Prepare release package
+      run: |
+        $tagName = "${{ github.ref_name }}"
+        $zipName = "Event-Support-Tool-$tagName-win64.zip"
+
+        # Create release directory
+        New-Item -ItemType Directory -Force -Path release_package
+
+        # Copy EXE and dependencies
+        Copy-Item -Recurse -Force dist/KPI_Tool/* release_package/
+
+        # Copy non-sensitive templates
+        if (Test-Path "configs") {
+          Copy-Item -Recurse -Force "configs" release_package/
+        }
+        if (Test-Path "assets/templates") {
+          New-Item -ItemType Directory -Force -Path release_package/assets | Out-Null
+          Copy-Item -Recurse -Force "assets/templates" release_package/assets/
+        }
+
+        @'
+快速使用说明
+1) 解压后运行 KPI_Tool.exe
+2) 参考 configs 和 assets/templates 补齐配置
+3) 运行产物默认不提交到仓库
+'@ | Set-Content -Encoding UTF8 release_package/快速使用说明.txt
+
+        # Create zip
+        Compress-Archive -Path release_package/* -DestinationPath $zipName
+
+        Write-Host "Release package created: $zipName"
+
+    - name: Create GitHub Release
+      uses: softprops/action-gh-release@v1
+      with:
+        name: ${{ github.ref_name }}
+        files: Event-Support-Tool-${{ github.ref_name }}-win64.zip
+        draft: false
+        prerelease: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

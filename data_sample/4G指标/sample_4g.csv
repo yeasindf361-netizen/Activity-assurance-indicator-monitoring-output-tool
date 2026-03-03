@@ -1,0 +1,4 @@
+time_start,time_end,vendor,cgi,cell_name,kpi_util_max,kpi_prb_ul_util,kpi_prb_dl_util
+2026-03-01 08:45:00,2026-03-01 09:00:00,NOKIA,460-00-000000001,示例4G小区A,0.0753,0.02,0.03
+2026-03-01 08:45:00,2026-03-01 09:00:00,NOKIA,460-00-000000002,示例4G小区B,0.0096,N/A,-
+
