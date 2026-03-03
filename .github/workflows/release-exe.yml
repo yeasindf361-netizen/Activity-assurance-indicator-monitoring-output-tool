@@ -34,7 +34,8 @@ jobs:
 
     - name: Build EXE with PyInstaller
       run: |
-        pyinstaller scripts/packaging/KPI_Tool.spec --noconfirm --clean --distpath dist --workpath build
+        python -m PyInstaller --version
+        python -m PyInstaller scripts/packaging/KPI_Tool.spec --noconfirm --clean --distpath dist --workpath build
         if (!(Test-Path "dist/KPI_Tool")) {
           Write-Error "Build failed: dist/KPI_Tool not found"
           exit 1
