@@ -14,9 +14,9 @@ a = Analysis(
     pathex=[str(SRC_DIR)],
     binaries=[],
     datas=[
-        (str(CONFIGS_DIR), '配置文件'),
+        (str(CONFIGS_DIR), 'configs'),
         (str(ICON_FILE), '.'),
-        (str(TEMPLATES_DIR), '保障小区清单'),
+        (str(TEMPLATES_DIR), 'assets/templates'),
     ],
     hiddenimports=['customtkinter', 'CTkMessagebox', 'rapidfuzz', 'openpyxl', 'pandas', 'numpy'],
     hookspath=[],
