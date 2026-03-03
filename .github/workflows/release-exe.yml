@@ -60,12 +60,13 @@ jobs:
           Copy-Item -Recurse -Force "assets/templates" release_package/assets/
         }
 
-        @'
-快速使用说明
-1) 解压后运行 KPI_Tool.exe
-2) 参考 configs 和 assets/templates 补齐配置
-3) 运行产物默认不提交到仓库
-'@ | Set-Content -Encoding UTF8 release_package/快速使用说明.txt
+        $quickStart = @(
+          "快速使用说明"
+          "1) 解压后运行 KPI_Tool.exe"
+          "2) 参考 configs 和 assets/templates 补齐配置"
+          "3) 运行产物默认不提交到仓库"
+        )
+        $quickStart | Set-Content -Encoding UTF8 "release_package/快速使用说明.txt"
 
         # Create zip
         Compress-Archive -Path release_package/* -DestinationPath $zipName
