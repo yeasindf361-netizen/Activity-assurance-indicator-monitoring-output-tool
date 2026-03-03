@@ -1,11 +1,23 @@
 # -*- mode: python ; coding: utf-8 -*-
 
+from pathlib import Path
+
+ROOT = Path(SPECPATH).resolve().parents[1]
+SRC_DIR = ROOT / 'src'
+ASSETS_DIR = ROOT / 'assets'
+CONFIGS_DIR = ROOT / 'configs'
+TEMPLATES_DIR = ASSETS_DIR / 'templates'
+ICON_FILE = ASSETS_DIR / 'logo.ico'
 
 a = Analysis(
-    ['src/main_gui.py'],
-    pathex=['src'],
+    [str(SRC_DIR / 'main_gui.py')],
+    pathex=[str(SRC_DIR)],
     binaries=[],
-    datas=[('configs', '配置文件'), ('assets/logo.ico', '.'), ('assets/templates', '保障小区清单')],
+    datas=[
+        (str(CONFIGS_DIR), '配置文件'),
+        (str(ICON_FILE), '.'),
+        (str(TEMPLATES_DIR), '保障小区清单'),
+    ],
     hiddenimports=['customtkinter', 'CTkMessagebox', 'rapidfuzz', 'openpyxl', 'pandas', 'numpy'],
     hookspath=[],
     hooksconfig={},
@@ -40,7 +52,7 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon=['assets/logo.ico'],
+    icon=[str(ICON_FILE)],
 )
 coll = COLLECT(
     exe,
